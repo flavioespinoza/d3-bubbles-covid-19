@@ -3,32 +3,6 @@ const {
   colors: { ...colors },
 } = require('tailwindcss/defaultTheme');
 
-// css parser - turns css classes into js object
-const css = (strings, ...values) => {
-  const evaluated = strings.reduce((acc, string, i) => {
-    acc.push(string);
-    if (values[i]) acc.push(values[i].toString());
-
-    return acc;
-  }, []);
-
-  const rules = evaluated
-    .join('')
-    .replace(/ /g, '')
-    .split(/;\n|;|\n/);
-
-  // transform the rules array into an object literal
-  return rules.reduce((acc, rule) => {
-    // skip empty entries created by newlines
-    if (!rule) return acc;
-
-    const pair = rule.split(':');
-
-    acc[pair[0]] = pair[1];
-    return acc;
-  }, {});
-};
-
 module.exports = {
   important: true,
   theme: {
@@ -78,10 +52,10 @@ module.exports = {
       },
     },
     extend: {
-      margin: {
-        '96': '24rem',
-        '128': '32rem',
-      },
+      // margin: {
+      //   '96': '24rem',
+      //   '128': '32rem',
+      // },
     },
   },
   variants: {
