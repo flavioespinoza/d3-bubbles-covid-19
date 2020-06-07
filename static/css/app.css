@@ -2,7 +2,8 @@
 @import "lib/aos.min.css";
 @import "lib/edge.min.css";
 @import "lib/normalize.css";
-a html {
+/* Add you custom CSS BELOW this line --------------------------------------------------------------------------------- */
+html {
   background-color: #f8f7f7;
 }
 

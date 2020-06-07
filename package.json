@@ -1,0 +1,38 @@
+{
+  "name": "d3-bubbles-covid-19",
+  "version": "1.0.0",
+  "description": "COVID-19 Tracking by US State",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flavioespinoza/d3-bubbles-covid-19.git"
+  },
+  "keywords": [
+    "covid-19",
+    "covid",
+    "caronavirus",
+    "d3",
+    "bubble",
+    "bubble-chart",
+    "d3",
+    "animated",
+    "bubble",
+    "chart",
+    "d3",
+    "force"
+  ],
+  "author": "Flavio Espinoza <flavio.espinoza@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flavioespinoza/d3-bubbles-covid-19/issues"
+  },
+  "homepage": "https://github.com/flavioespinoza/d3-bubbles-covid-19#readme",
+  "dependencies": {
+    "add": "^2.0.6",
+    "tailwindcss": "^1.4.6",
+    "yarn": "^1.22.4"
+  }
+}
