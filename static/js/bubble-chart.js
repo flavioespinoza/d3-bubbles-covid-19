@@ -31,27 +31,10 @@ function bubbleChart() {
   let bubbles = null;
   let nodes = [];
 
-  // Charge function that is called for each node.
-  // As part of the ManyBody force.
-  // This is what creates the repulsion between nodes.
-  //
-  // Charge is proportional to the diameter of the
-  // circle (which is stored in the radius attribute
-  // of the circle's associated data.
-  //
-  // This is done to allow for accurate collision
-  // detection with nodes of different sizes.
-  //
-  // Charge is negative because we want nodes to repel.
-  // @v4 Before the charge was a stand-alone attribute
-  //  of the force layout. Now we can use it as a separate force!
   function charge(d) {
     return -Math.pow(d.radius, 2.0) * forceStrength;
   }
 
-  // Here we create a force layout and
-  // @v4 We create a force simulation now and
-  //  add forces to it.
   let simulation = d3
     .forceSimulation()
     .velocityDecay(0.2)
@@ -64,25 +47,6 @@ function bubbleChart() {
   //  which we don't want as there aren't any nodes yet.
   simulation.stop();
 
-  // Nice looking colors - no reason to buck the trend
-  // @v4 scales now have a flattened naming scheme
-  let fillColor = d3
-    .scaleOrdinal()
-    .domain(['low', 'medium', 'high'])
-    .range(['#d84b2a', '#beccae', '#7aa25c']);
-
-  /*
-   * This data manipulation function takes the raw data from
-   * the CSV file and converts it into an array of node objects.
-   * Each node will store data and visualization values to visualize
-   * a bubble.
-   *
-   * rawData is expected to be an array of data objects, read in from
-   * one of d3's loading functions like d3.csv.
-   *
-   * This function returns the new node array, with a node in that
-   * array for each element in the rawData input.
-   */
   function createNodes(rawData) {
 
     // max bubble radius set by d.total (total reported people infected with covid-19 virus)
@@ -164,6 +128,9 @@ function bubbleChart() {
    * a d3 loading function like d3.csv.
    */
 
+  let colorRange =  d3.schemeRdBu[9];
+  let color = d3.scaleOrdinal().range(colorRange)
+
   let chart = function chart(selector, rawData) {
     // convert raw data into nodes data
 
@@ -189,12 +156,8 @@ function bubbleChart() {
       .append('circle')
       .classed('bubble', true)
       .attr('r', 0)
-      .attr('fill', function (d) {
-        return fillColor(d.group);
-      })
-      .attr('stroke', function (d) {
-        return d3.rgb(fillColor(d.group)).darker();
-      })
+      .attr('fill', d => color(d.state))
+      .attr('stroke', d => color(d.state))
       .attr('stroke-width', 2)
       .on('mouseover', tooltipDetail)
       .on('mouseout', hideDetail);
@@ -323,9 +286,7 @@ function bubbleChart() {
   }
 
   function tooltipDetail(d) {
-
     let date = new Date(d.lastUpdateEt).toDateString()
-    console.log(date)
 
     // TODO - add map func for props
     let keys = _.keys(d)
@@ -342,7 +303,6 @@ function bubbleChart() {
 
     let content = '<div class="card p12 tooltip--d3" style="width: 240px">' +
       `<h3 class="text-pink">${d.state}</h3>` +
-
 
       `<div>
         <span class="text-grey mt12">Positive</span>
@@ -382,9 +342,6 @@ function bubbleChart() {
    * Hides tooltip
    */
   function hideDetail(d) {
-    // reset outline
-    d3.select(this).attr('stroke', d3.rgb(fillColor(d.group)).darker());
-
     tooltip.hideTooltip();
   }
 
@@ -420,10 +377,7 @@ const _bubbleChart = bubbleChart();
  * @param  {array} data
  * @return {void}
  */
-function display(error, data) {
-  if (error) {
-    console.log(error);
-  }
+function display(data) {
   _bubbleChart('#bubble_chart', data);
 }
 
@@ -454,8 +408,23 @@ function setupButtons() {
     });
 }
 
-// Load the data.
-d3.csv('static/data/covid.csv', display);
+async function getData() {
+  const url = 'https://covidtracking.com/api/states'
+  try {
+    return await axios.get(url)
+  } catch (err) {
+    console.error('ERROR: ', err)
+    console.log(err)
+    alert(err + ' -> async function getData() -> url: ' + url)
+  }
+}
 
-// setup the buttons.
-setupButtons();
+const init = new Promise(async function (resolve) {
+  let res = await getData()
+  resolve(res.data)
+})
+
+init.then(function (res) {
+  display(res)
+  setupButtons();
+})

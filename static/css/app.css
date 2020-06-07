@@ -812,6 +812,10 @@ h6 {
     line-height: 1.6;
 }
 
+#bubble_chart {
+    background-color: black;
+}
+
 .tooltip--d3 {
     background-color: pink
 }

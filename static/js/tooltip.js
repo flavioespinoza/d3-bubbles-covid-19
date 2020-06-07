@@ -23,7 +23,7 @@ function floatingTooltip(tooltipId, width) {
 
   /*
    * Display tooltip with provided content.
-   *
+   *`1`
    * content is expected to be HTML string.
    *
    * event is d3.event for positioning.
