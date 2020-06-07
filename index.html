@@ -17,17 +17,8 @@
   <!-- Roboto font styles for bootstrap -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"/>
 
-  <!-- Animate on Scroll -->
-  <link rel="stylesheet" href="static/css/aos.min.css"/>
-
-  <!-- Edge CSS for margin and padding -->
-  <link rel="stylesheet" href="static/css/edge.min.css"/>
-
-  <!-- App CSS -->
-  <link rel="stylesheet" href="static/css/app.css">
-
   <!-- Styles CSS for custom styles -->
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/app.css">
 
 </head>
 <body>
@@ -60,21 +51,19 @@
           </div>
         </header>
 
-        <section id="sections" class="section section--less-pad -two-column mb48">
-          <div class="text-pink">
-            <a href="#" id="all" class="button button--big-pink active">All Grants</a>
-            <a href="#" id="year" class="button button--big-pink">Grants By Year</a>
-          </div>
-          <div class="bg-white shadow p-8">
+        <div data-aos="fade-in" data-aos-delay="1800" class="masthead mb-10 aos-init aos-animate">
+          <picture class="masthead__image-wrapper">
             <div id="bubble_chart">
               <!-- d3 chart will be rendered here -->
             </div>
-          </div>
-        </section>
+          </picture>
+        </div>
 
       </div>
     </main>
   </div>
+
+
 
   <!-- js libs -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
