@@ -1,3 +1,5 @@
+const { colors: { teal, orange, pink, ...colors } } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   important: true,
   theme: {
@@ -5,15 +7,7 @@ module.exports = {
       display: ['Roboto', 'sans-serif'],
       body: ['Roboto', 'sans-serif'],
     },
-    colors: {
-      black: '#171e21',
-      cyan: '#9cdbff',
-      pink: '#e81b74',
-      indigo: '#5c6ac4',
-      blue: '#00a6cc',
-      red: '#de3618',
-      grey: '#969696'
-    },
+    colors: colors,
     extend: {
       colors: {
         pink: {
