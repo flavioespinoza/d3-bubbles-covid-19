@@ -1,4 +1,33 @@
-const {colors: {teal, orange, pink, ...colors}} = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin');
+const {
+  colors: { ...colors },
+} = require('tailwindcss/defaultTheme');
+
+// css parser - turns css classes into js object
+const css = (strings, ...values) => {
+  const evaluated = strings.reduce((acc, string, i) => {
+    acc.push(string);
+    if (values[i]) acc.push(values[i].toString());
+
+    return acc;
+  }, []);
+
+  const rules = evaluated
+    .join('')
+    .replace(/ /g, '')
+    .split(/;\n|;|\n/);
+
+  // transform the rules array into an object literal
+  return rules.reduce((acc, rule) => {
+    // skip empty entries created by newlines
+    if (!rule) return acc;
+
+    const pair = rule.split(':');
+
+    acc[pair[0]] = pair[1];
+    return acc;
+  }, {});
+};
 
 module.exports = {
   important: true,
@@ -12,9 +41,9 @@ module.exports = {
         default: '#171e21',
       },
       indigo: {
-        lighter: '#b3bcf5',
-        default: '#5c6ac4',
         dark: '#202e78',
+        default: '#5c6ac4',
+        lighter: '#b3bcf5',
       },
       orange: {
         default: '#fd7e0c',
@@ -29,8 +58,8 @@ module.exports = {
         default: '#00a6cc',
       },
       pink: {
-        default: '#e81b74',
         dark: '#6f164a',
+        default: '#e81b74',
         light: '#eb3981',
         lighter: '#fef3f8',
       },
@@ -42,6 +71,7 @@ module.exports = {
         darkest: '#232323',
         darker: '#464646',
         dark: '#6d6d6d',
+        default: '#969696',
         light: '#b3b3b3',
         lighter: '#e9e9e9',
         lightest: '#f8f7f7',
@@ -52,10 +82,9 @@ module.exports = {
         '96': '24rem',
         '128': '32rem',
       },
-
-    }
+    },
   },
   variants: {
-    opacity: ['responsive', 'hover']
-  }
-}
+    opacity: ['responsive', 'hover'],
+  },
+};
