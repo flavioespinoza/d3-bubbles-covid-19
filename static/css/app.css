@@ -1,12 +1,9 @@
 /* Imports ----------------------------------------------------------------------------------- */
 @import "lib/aos.min.css";
 @import "lib/edge.min.css";
-@import "lib/normalize.css";
+@import "lib/tailwind.css";
+@import "lib/html.css";
 /* Add you custom CSS BELOW this line --------------------------------------------------------------------------------- */
-html {
-  background-color: #f8f7f7;
-}
-
 body {
   width: 100%;
   background-color: #f8f7f7;
