@@ -25,9 +25,7 @@ module.exports = {
       },
     },
     extend: {
-      colors: {
-
-      },
+      colors: colors,
       margin: {
         '96': '24rem',
         '128': '32rem',
