@@ -4,16 +4,16 @@ function bubbleChart() {
   let height = 640;
 
   // tooltip for mouseover functionality
-  let tooltip = floatingTooltip('gates_tooltip', 240);
+  let tooltip = floatingTooltip('bubble_tooltip', 240);
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  let center = { x: width / 2, y: height / 2 };
+  let center = {x: width / 2, y: height / 2};
 
   let yearCenters = {
-    2008: { x: width / 3, y: height / 2 },
-    2009: { x: width / 2, y: height / 2 },
-    2010: { x: (2 * width) / 3, y: height / 2 },
+    2008: {x: width / 3, y: height / 2},
+    2009: {x: width / 2, y: height / 2},
+    2010: {x: (2 * width) / 3, y: height / 2},
   };
 
   // X locations of the year titles.
@@ -89,7 +89,7 @@ function bubbleChart() {
     const max = d3.max(rawData, function (d) {
       return +d.total;
     });
-    
+
     const scale = d3.scalePow().exponent(0.5).range([2, 85]).domain([0, max]);
 
     const bubbles = rawData.map(function (d, i) {
@@ -97,16 +97,35 @@ function bubbleChart() {
         console.log(JSON.stringify(d, null, 2))
       }
       return {
-        id: d.id,
+        // bubble props
         radius: scale(+d.total),
         value: +d.total,
-        date: d.date,
+        x: Math.random() * 900,
+        y: Math.random() * 800,
+
+        // COVID-19 API data props
         state: d.state,
+        date: d.date,
+        total: d.positive,
+        death: d.death,
+        hospitalized: d.hospitalized,
+        dateChecked: d.dateChecked,
+        totalTestResults: d.totalTestResults,
+        totalTestResultsIncrease: d.totalTestResultsIncrease,
+        posNeg: d.posNeg,
+        deathIncrease: d.deathIncrease,
+        hospitalizedIncrease: d.hospitalizedIncrease,
+        hospitalizedCurrently: d.hospitalizedCurrently,
+        hospitalizedCumulative: d.hospitalizedCumulative,
         positive: d.positive,
         negative: d.negative,
         pending: d.pending,
-        hospitalizedCurrently: d.hospitalizedCurrently,
-        hospitalizedCumulative: d.hospitalizedCumulative,
+        commercialScore: d.commercialScore,
+        negativeRegularScore: d.negativeRegularScore,
+        negativeScore: d.negativeScore,
+        positiveScore: d.positiveScore,
+        score: d.score,
+        grade: d.grade,
         inIcuCurrently: d.inIcuCurrently,
         inIcuCumulative: d.inIcuCumulative,
         onVentilatorCurrently: d.onVentilatorCurrently,
@@ -116,27 +135,10 @@ function bubbleChart() {
         lastUpdateEt: d.lastUpdateEt,
         dateModified: d.dateModified,
         checkTimeEt: d.checkTimeEt,
-        death: d.death,
-        hospitalized: d.hospitalized,
-        dateChecked: d.dateChecked,
         fips: d.fips,
         positiveIncrease: d.positiveIncrease,
         negativeIncrease: d.negativeIncrease,
-        total: d.total,
-        totalTestResults: d.totalTestResults,
-        totalTestResultsIncrease: d.totalTestResultsIncrease,
-        posNeg: d.posNeg,
-        deathIncrease: d.deathIncrease,
-        hospitalizedIncrease: d.hospitalizedIncrease,
         hash: d.hash,
-        commercialScore: d.commercialScore,
-        negativeRegularScore: d.negativeRegularScore,
-        negativeScore: d.negativeScore,
-        positiveScore: d.positiveScore,
-        score: d.score,
-        grade: d.grade,
-        x: Math.random() * 900,
-        y: Math.random() * 800,
       };
     });
 
@@ -165,7 +167,7 @@ function bubbleChart() {
   let chart = function chart(selector, rawData) {
     // convert raw data into nodes data
 
-    console.log(JSON.stringify(rawData, null, 2));
+    // console.log(JSON.stringify(rawData, null, 2));
     nodes = createNodes(rawData);
 
     // Create a SVG element inside the provided selector
@@ -177,7 +179,7 @@ function bubbleChart() {
       return d.id;
     });
 
-    // Create new circle elements each with class `bubble`.
+    // Create new circle elements each with class bubble.
     // There will be one circle.bubble for each object in the nodes array.
     // Initially, their radius (r attribute) will be 0.
     // @v4 Selections are immutable, so lets capture the
@@ -194,7 +196,7 @@ function bubbleChart() {
         return d3.rgb(fillColor(d.group)).darker();
       })
       .attr('stroke-width', 2)
-      .on('mouseover', showDetail)
+      .on('mouseover', tooltipDetail)
       .on('mouseout', hideDetail);
 
     // @v4 Merge the original empty selection and the enter selection
@@ -305,16 +307,73 @@ function bubbleChart() {
   }
 
   /*
-   * Function called on mouseover to display the
-   * details of a bubble in the tooltip.
-   */
-  function showDetail(d) {
-    // change outline to indicate hover state.
-    d3.select(this).attr('stroke', 'black');
+ * Helper function to convert a number into a string
+ * and add commas to it to improve presentation.
+ */
+  function addCommas(nStr) {
+    nStr += '';
+    let x = nStr.split('.');
+    let x1 = x[0];
+    let x2 = x.length > 1 ? '.' + x[1] : '';
+    let rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+  }
 
-    let content = html`<div>
-      <li className="test"></li>
-    </div>`;
+  function tooltipDetail(d) {
+
+    let date = new Date(d.lastUpdateEt).toDateString()
+    console.log(date)
+
+    // TODO - add map func for props
+    let keys = _.keys(d)
+    let omit = [
+      'radius',
+      'value',
+      'x',
+      'y',
+      'index',
+      'vy',
+      'vx',
+    ]
+    let set = new Set(omit)
+
+    let content = '<div class="card p12 tooltip--d3" style="width: 240px">' +
+      `<h3 class="text-pink">${d.state}</h3>` +
+
+
+      `<div>
+        <span class="text-grey mt12">Positive</span>
+        <span class="fr">${addCommas(d.positive)}</span>
+      </div>` +
+
+      `<div>
+        <span class="text-grey mt12">Recovered</span>
+        <span class="fr">${addCommas(d.recovered)}</span>
+      </div>` +
+
+      `<div>
+        <span class="text-grey mt12">Deaths</span>
+        <span class="fr">${addCommas(d.death)}</span>
+      </div>` +
+
+      `<div>
+        <div class="divider--sm w100 mv24"></div>
+      </div>` +
+
+      `<div>
+        <span class="text-grey mt12 mr12">Hospitalized</span>
+        <span class="fr">${addCommas(d.hospitalized)}</span>
+      </div>` +
+
+      `<div class="mt24">
+        <div class="text-grey text-xs">Last Update</div>
+        <div class="text-pink">${date}</div>
+      </div>` +
+
+      '';
 
     tooltip.showTooltip(content, d3.event);
   }
@@ -356,9 +415,9 @@ const _bubbleChart = bubbleChart();
 
 
 /**
- * display - render bubble chart 
- * @param  {string} error 
- * @param  {array} data 
+ * display - render bubble chart
+ * @param  {string} error
+ * @param  {array} data
  * @return {void}
  */
 function display(error, data) {
@@ -375,10 +434,10 @@ function setupButtons() {
   d3.select('#toolbar')
     .selectAll('.button')
     .on('click', function () {
-      
+
       // Remove active class from all buttons
       d3.selectAll('.button').classed('active', false);
-      
+
       // Find the button just clicked
       let button = d3.select(this);
 
@@ -393,23 +452,6 @@ function setupButtons() {
       _bubbleChart.toggleDisplay(buttonId);
 
     });
-}
-
-/*
- * Helper function to convert a number into a string
- * and add commas to it to improve presentation.
- */
-function addCommas(nStr) {
-  nStr += '';
-  let x = nStr.split('.');
-  let x1 = x[0];
-  let x2 = x.length > 1 ? '.' + x[1] : '';
-  let rgx = /(\d+)(\d{3})/;
-  while (rgx.test(x1)) {
-    x1 = x1.replace(rgx, '$1' + ',' + '$2');
-  }
-
-  return x1 + x2;
 }
 
 // Load the data.

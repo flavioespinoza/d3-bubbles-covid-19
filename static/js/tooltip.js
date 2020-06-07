@@ -5,9 +5,9 @@
  * so check out bubble_chart.css for more details.
  */
 function floatingTooltip(tooltipId, width) {
-  // Local variable to hold tooltip div for
+  // Local letiable to hold tooltip div for
   // manipulation in other functions.
-  var tt = d3.select('body')
+  let tt = d3.select('body')
     .append('div')
     .attr('class', 'tooltip')
     .attr('id', tooltipId)
@@ -47,25 +47,25 @@ function floatingTooltip(tooltipId, width) {
    * based on d3 mouse event.
    */
   function updatePosition(event) {
-    var xOffset = 20;
-    var yOffset = 10;
+    let xOffset = 20;
+    let yOffset = 10;
 
-    var ttw = tt.style('width');
-    var tth = tt.style('height');
+    let ttw = tt.style('width');
+    let tth = tt.style('height');
 
-    var wscrY = window.scrollY;
-    var wscrX = window.scrollX;
+    let wscrY = window.scrollY;
+    let wscrX = window.scrollX;
 
-    var curX = (document.all) ? event.clientX + wscrX : event.pageX;
-    var curY = (document.all) ? event.clientY + wscrY : event.pageY;
-    var ttleft = ((curX - wscrX + xOffset * 2 + ttw) > window.innerWidth) ?
+    let curX = (document.all) ? event.clientX + wscrX : event.pageX;
+    let curY = (document.all) ? event.clientY + wscrY : event.pageY;
+    let ttleft = ((curX - wscrX + xOffset * 2 + ttw) > window.innerWidth) ?
                  curX - ttw - xOffset * 2 : curX + xOffset;
 
     if (ttleft < wscrX + xOffset) {
       ttleft = wscrX + xOffset;
     }
 
-    var tttop = ((curY - wscrY + yOffset * 2 + tth) > window.innerHeight) ?
+    let tttop = ((curY - wscrY + yOffset * 2 + tth) > window.innerHeight) ?
                 curY - tth - yOffset * 2 : curY + yOffset;
 
     if (tttop < wscrY + yOffset) {
