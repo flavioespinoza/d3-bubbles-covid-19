@@ -5,6 +5,10 @@ const {
 
 module.exports = {
   important: true,
+  purge: [
+    './index.html', // <-- search html for class names
+    './static/css/*.css',  // <-- remove unused classes from css
+  ],
   theme: {
     fontFamily: {
       display: ['Roboto', 'sans-serif'],
