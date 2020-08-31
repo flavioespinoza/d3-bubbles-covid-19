@@ -1,0 +1,1 @@
+ npx tailwind build ./css/tailwind.css -o ./static/css/lib/tailwind.css

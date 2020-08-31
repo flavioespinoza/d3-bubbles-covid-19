@@ -6,3 +6,8 @@ git commit -m "first commit"
 git remote add origin https://github.com/flavioespinoza/d3-bubbles-covid-19.git
 git push -u origin master
 ```
+
+
+```js
+const me = 'Flavio'
+```

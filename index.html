@@ -5,7 +5,6 @@
   <title>COVID-19 Tracking by US State</title>
   <meta name="description" content="COVID-19 Tracking by US State">
   <meta name="author" content="Flavio Espinoza">
-
   <meta name="viewport" content="width=device-width,initial-scale=0.5">
 
   <!-- Bootstrap CSS-->
@@ -17,85 +16,90 @@
   <!-- Roboto font styles for bootstrap -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"/>
 
-  <!-- Animate on Scroll -->
-  <link rel="stylesheet" href="static/css/aos.min.css"/>
+  <!-- Animate On Scroll -->
+  <link rel='stylesheet' href='static/css/lib/aos.min.css'>
 
-  <!-- Edge CSS for margin and padding -->
-  <link rel="stylesheet" href="static/css/edge.min.css"/>
+  <link rel='stylesheet' href='static/css/lib/html.css'>
 
-  <!-- App CSS -->
-  <link rel="stylesheet" href="static/css/app.css">
+  <!-- tailwind -->
+  <link rel='stylesheet' href='static/css/lib/tailwind.css'>
 
   <!-- Styles CSS for custom styles -->
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/app.css">
 
 </head>
 <body>
 
-  <div id="app" class="layout">
-    <header role="banner" class="site-header">
-      <div class="site-header__outer">
-        <div class="site-header__wrapper">
-          <div class="site-header__logo-wrapper">
-            <a href="/" title="covid-19" class="site-header__logo"
-               style="background-image: url('#')">
-              <span class="site-header__logo-text">COVID-19 Tracker by State</span>
-            </a>
-          </div>
+<div id="app" class="layout">
+  <main id="main" role="main" class="main container pt-24 bg-white shadow-md">
+    <div class="template--general">
+
+
+      <!-- Button -->
+      <section id='buttons'>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button" class="button button-xs">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button" class="button button-sm hover:bg-pink">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button"
+                  class="px-6 py-3 text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            Button text
+          </button>
+        </span>
+      </section>
+
+
+      <div data-aos="fade-in" data-aos-delay="1800" class="masthead mb-10 aos-init aos-animate">
+        <div id="bubble_chart">
+          <!-- d3 chart will be rendered here -->
         </div>
       </div>
-    </header>
 
-    <main id="main" role="main" class="main">
-      <div class="template--general">
 
-        <header data-aos="fade-in" data-aos-delay="1800" class="page-header section section--less-pad aos-init aos-animate">
-          <div class="page-header__meta">
-            <div class="page-header__title flex flex-col md:flex-row">
-              <div class="md:pr-16 md:flex-grow">
-                <h1 class="page-title mb48">COVID-19 Tracker by State</h1>
-                <h6>Latest updates from the COVID-19 Tracker Project</h6>
-              </div>
-            </div>
-          </div>
-        </header>
+    </div>
+  </main>
+</div>
 
-        <section id="sections" class="section section--less-pad -two-column mb48">
-          <div class="text-pink">
-            <a href="#" id="all" class="button button--big-pink active">All Grants</a>
-            <a href="#" id="year" class="button button--big-pink">Grants By Year</a>
-          </div>
-          <div class="bg-white shadow p-8">
-            <div id="bubble_chart">
-              <!-- d3 chart will be rendered here -->
-            </div>
-          </div>
-        </section>
 
-      </div>
-    </main>
-  </div>
+<!-- js libs -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <!-- js libs -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-          crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-          crossorigin="anonymous"></script>
-  <script src="https://d3js.org/d3-color.v1.min.js"></script>
-  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <script src="//d3js.org/d3.v4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-  <!-- static js -->
-  <script src="static/js/lodash.min.js"></script>
-  <script src="static/js/tooltip.js"></script>
-  <script src="static/js/bubble-chart.js"></script>
+<!-- static js -->
+<script src="static/js/lodash.min.js"></script>
+<script src="static/js/tooltip.js"></script>
+<script src="static/js/bubble-chart.js"></script>
 
 </body>
 </html>

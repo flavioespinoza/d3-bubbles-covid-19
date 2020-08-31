@@ -111,5 +111,7 @@ dist
 .env
 
 # local and temp files and directories
-local*
-temp*
+local-*
+temp-*
+
+node_modules
