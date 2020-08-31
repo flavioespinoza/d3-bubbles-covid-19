@@ -301,30 +301,30 @@ function bubbleChart() {
     ]
     let set = new Set(omit)
 
-    let content = '<div class="card p12 tooltip--d3" style="width: 240px">' +
-      `<h3 class="text-pink">${d.state}</h3>` +
+    let content = '<div class="card p-4 tooltip--d3" style="width: 240px">' +
+      `<div class="h3 text-pink">${d.state}</div>` +
 
       `<div>
-        <span class="text-grey mt12">Positive</span>
+        <span class="text-grey mt-12">Positive</span>
         <span class="fr">${addCommas(d.positive)}</span>
       </div>` +
 
       `<div>
-        <span class="text-grey mt12">Recovered</span>
+        <span class="text-grey mt-12">Recovered</span>
         <span class="fr">${addCommas(d.recovered)}</span>
       </div>` +
 
       `<div>
-        <span class="text-grey mt12">Deaths</span>
+        <span class="text-grey mt-12">Deaths</span>
         <span class="fr">${addCommas(d.death)}</span>
       </div>` +
 
       `<div>
-        <div class="divider--sm w100 mv24"></div>
+        <div class="divider--sm w100 mv-24"></div>
       </div>` +
 
       `<div>
-        <span class="text-grey mt12 mr12">Hospitalized</span>
+        <span class="text-grey mt-12 mr-12">Hospitalized</span>
         <span class="fr">${addCommas(d.hospitalized)}</span>
       </div>` +
 

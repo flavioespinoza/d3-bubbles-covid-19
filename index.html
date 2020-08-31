@@ -5,7 +5,6 @@
   <title>COVID-19 Tracking by US State</title>
   <meta name="description" content="COVID-19 Tracking by US State">
   <meta name="author" content="Flavio Espinoza">
-
   <meta name="viewport" content="width=device-width,initial-scale=0.5">
 
   <!-- Bootstrap CSS-->
@@ -20,123 +19,87 @@
   <!-- Animate On Scroll -->
   <link rel='stylesheet' href='static/css/lib/aos.min.css'>
 
+  <link rel='stylesheet' href='static/css/lib/html.css'>
+
   <!-- tailwind -->
   <link rel='stylesheet' href='static/css/lib/tailwind.css'>
-
-  <link rel='stylesheet' href='static/css/lib/edge.min.css'>
 
   <!-- Styles CSS for custom styles -->
   <link rel="stylesheet" href="static/css/app.css">
 
 </head>
-<body style="padding-left: 500px;">
+<body>
 
-  <div id="app" class="layout">
-
-    <main id="main" role="main" class="main p48">
-      <div class="template--general">
-
-        <header data-aos="fade-in" data-aos-delay="1800" class="page-header section section--less-pad aos-init aos-animate mt48 mb48">
-          <div class="page-header__meta">
-            <div class="page-header__title flex flex-col md:flex-row">
-              <div class="md:pr-16 md:flex-grow">
-                
-                <div class="h1">COVID-19 Tracking Project</div>
-
-                <div class="card" style="width: 18rem;">
-                  <img src="http://fillmurray.io" class="card-img-top" alt="http://fillmurray.io">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Link goto somewhere</a>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-        </header>
-        
-        <header data-aos="fade-in" data-aos-delay="1800" class="page-header section section--less-pad aos-init aos-animate mt48 mb48">
-          <div class="page-header__meta">
-            <div class="page-header__title flex flex-col md:flex-row">
-              <div class="md:pr-16 md:flex-grow">
-                
-                <div class="h3 text-pink">100%</div>
-                <div class="h3 text-pink text-opacity-75">75%</div>
-                <div class="h3 text-pink text-opacity-50">50%</div>
-                <div class="h3 text-pink text-opacity-25">25</div>
-                
-              </div>
-            </div>
-          </div>
-        </header>
-
-      </br>
-      </br>
-      </br>
-        
-        <header data-aos="fade-in" data-aos-delay="1800" class="page-header section section--less-pad aos-init aos-animate mt48 mb48">
-          <div class="page-header__meta">
-            <div class="page-header__title">
-              <div class="md:pr-16 pl48 pos-rel">
-
-                <div style="width: 200px;" class="h3 text-pink pos-abs t0 l0">0______</div>
-                <div style="width: 200px;" class="h3 text-pink pos-abs t0 l0 transform origin-middle-left rotate-45">45______</div>
-                <div style="width: 200px;" class="h3 text-pink pos-abs t0 l0 transform origin-middle-left rotate-90">90______</div>
-                <div style="width: 200px;" class="h3 text-pink pos-abs t0 l0 transform origin-middle-left rotate-180">180______</div>
-                
-              </div>
-            </div>
-          </div>
-        </header>
-
-      </br>
-      </br>
-      </br>
-      </br>
-      </br>
-      </br>
+<div id="app" class="layout">
+  <main id="main" role="main" class="main container pt-24 bg-white shadow-md">
+    <div class="template--general">
 
 
-        <div data-aos="fade-in" data-aos-delay="1800" class="masthead mb-10 aos-init aos-animate">
-          <picture class="masthead__image-wrapper">
-            <button class='button button--big-pink'>
-              button button--big-pink
-            </div>
-            <div class='button button--filled button--sm gtm-cta'>
-              button button-default
-            </div>
-            <div id="bubble_chart">
-              <!-- d3 chart will be rendered here -->
-            </div>
-          </picture>
+      <!-- Button -->
+      <section id='buttons'>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button" class="button button-xs">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button" class="button button-sm hover:bg-pink">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            Button text
+          </button>
+        </span>
+        <span class="inline-flex rounded-md shadow-sm">
+          <button type="button"
+                  class="px-6 py-3 text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            Button text
+          </button>
+        </span>
+      </section>
+
+
+      <div data-aos="fade-in" data-aos-delay="1800" class="masthead mb-10 aos-init aos-animate">
+        <div id="bubble_chart">
+          <!-- d3 chart will be rendered here -->
         </div>
-
       </div>
-    </main>
-  </div>
 
-  <!-- js libs -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-          crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-          crossorigin="anonymous"></script>
-  <script src="https://d3js.org/d3-color.v1.min.js"></script>
-  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <script src="//d3js.org/d3.v4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <!-- static js -->
-  <script src="static/js/lodash.min.js"></script>
-  <script src="static/js/tooltip.js"></script>
-  <script src="static/js/bubble-chart.js"></script>
+    </div>
+  </main>
+</div>
+
+
+<!-- js libs -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- static js -->
+<script src="static/js/lodash.min.js"></script>
+<script src="static/js/tooltip.js"></script>
+<script src="static/js/bubble-chart.js"></script>
 
 </body>
 </html>
