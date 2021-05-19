@@ -409,7 +409,7 @@ function setupButtons() {
 }
 
 async function getData() {
-  const url = 'https://covidtracking.com/api/states'
+  const url = 'https://api.covidtracking.com/v2/states.json'
   try {
     return await axios.get(url)
   } catch (err) {

@@ -22,7 +22,7 @@
   <link rel='stylesheet' href='static/css/lib/html.css'>
 
   <!-- tailwind -->
-  <link rel='stylesheet' href='static/css/lib/tailwind.css'>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
   <!-- Styles CSS for custom styles -->
   <link rel="stylesheet" href="static/css/app.css">
@@ -33,40 +33,6 @@
 <div id="app" class="layout">
   <main id="main" role="main" class="main container pt-24 bg-white shadow-md">
     <div class="template--general">
-
-
-      <!-- Button -->
-      <section id='buttons'>
-        <span class="inline-flex rounded-md shadow-sm">
-          <button type="button" class="button button-xs">
-            Button text
-          </button>
-        </span>
-        <span class="inline-flex rounded-md shadow-sm">
-          <button type="button" class="button button-sm hover:bg-pink">
-            Button text
-          </button>
-        </span>
-        <span class="inline-flex rounded-md shadow-sm">
-          <button type="button"
-                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-            Button text
-          </button>
-        </span>
-        <span class="inline-flex rounded-md shadow-sm">
-          <button type="button"
-                  class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-            Button text
-          </button>
-        </span>
-        <span class="inline-flex rounded-md shadow-sm">
-          <button type="button"
-                  class="px-6 py-3 text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-            Button text
-          </button>
-        </span>
-      </section>
-
 
       <div data-aos="fade-in" data-aos-delay="1800" class="masthead mb-10 aos-init aos-animate">
         <div id="bubble_chart">
@@ -81,6 +47,8 @@
 
 
 <!-- js libs -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
