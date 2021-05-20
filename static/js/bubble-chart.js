@@ -8,12 +8,12 @@ function bubbleChart() {
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
-  let center = {x: width / 2, y: height / 2};
+  let center = { x: width / 2, y: height / 2 };
 
   let yearCenters = {
-    2008: {x: width / 3, y: height / 2},
-    2009: {x: width / 2, y: height / 2},
-    2010: {x: (2 * width) / 3, y: height / 2},
+    2008: { x: width / 3, y: height / 2 },
+    2009: { x: width / 2, y: height / 2 },
+    2010: { x: (2 * width) / 3, y: height / 2 },
   };
 
   // X locations of the year titles.
@@ -48,7 +48,6 @@ function bubbleChart() {
   simulation.stop();
 
   function createNodes(rawData) {
-
     // max bubble radius set by d.total (total reported people infected with covid-19 virus)
     const max = d3.max(rawData, function (d) {
       return +d.total;
@@ -58,7 +57,7 @@ function bubbleChart() {
 
     const bubbles = rawData.map(function (d, i) {
       if (i === 0) {
-        console.log(JSON.stringify(d, null, 2))
+        console.log(JSON.stringify(d, null, 2));
       }
       return {
         // bubble props
@@ -128,8 +127,8 @@ function bubbleChart() {
    * a d3 loading function like d3.csv.
    */
 
-  let colorRange =  d3.schemeRdBu[9];
-  let color = d3.scaleOrdinal().range(colorRange)
+  let colorRange = d3.schemeRdBu[9];
+  let color = d3.scaleOrdinal().range(colorRange);
 
   let chart = function chart(selector, rawData) {
     // convert raw data into nodes data
@@ -156,8 +155,8 @@ function bubbleChart() {
       .append('circle')
       .classed('bubble', true)
       .attr('r', 0)
-      .attr('fill', d => color(d.state))
-      .attr('stroke', d => color(d.state))
+      .attr('fill', (d) => color(d.state))
+      .attr('stroke', (d) => color(d.state))
       .attr('stroke-width', 2)
       .on('mouseover', tooltipDetail)
       .on('mouseout', hideDetail);
@@ -270,9 +269,9 @@ function bubbleChart() {
   }
 
   /*
- * Helper function to convert a number into a string
- * and add commas to it to improve presentation.
- */
+   * Helper function to convert a number into a string
+   * and add commas to it to improve presentation.
+   */
   function addCommas(nStr) {
     nStr += '';
     let x = nStr.split('.');
@@ -286,53 +285,39 @@ function bubbleChart() {
   }
 
   function tooltipDetail(d) {
-    let date = new Date(d.lastUpdateEt).toDateString()
+    let date = new Date(d.lastUpdateEt).toDateString();
 
     // TODO - add map func for props
-    let keys = _.keys(d)
-    let omit = [
-      'radius',
-      'value',
-      'x',
-      'y',
-      'index',
-      'vy',
-      'vx',
-    ]
-    let set = new Set(omit)
+    let keys = _.keys(d);
+    let omit = ['radius', 'value', 'x', 'y', 'index', 'vy', 'vx'];
+    let set = new Set(omit);
 
-    let content = '<div class="card p-4 tooltip--d3" style="width: 240px">' +
+    let content =
+      '<div class="card p-4 tooltip--d3" style="width: 240px">' +
       `<div class="h3 text-pink">${d.state}</div>` +
-
       `<div>
         <span class="text-grey mt-12">Positive</span>
         <span class="fr">${addCommas(d.positive)}</span>
       </div>` +
-
       `<div>
         <span class="text-grey mt-12">Recovered</span>
         <span class="fr">${addCommas(d.recovered)}</span>
       </div>` +
-
       `<div>
         <span class="text-grey mt-12">Deaths</span>
         <span class="fr">${addCommas(d.death)}</span>
       </div>` +
-
       `<div>
         <div class="divider--sm w100 mv-24"></div>
       </div>` +
-
       `<div>
         <span class="text-grey mt-12 mr-12">Hospitalized</span>
         <span class="fr">${addCommas(d.hospitalized)}</span>
       </div>` +
-
       `<div class="mt24">
         <div class="text-grey text-xs">Last Update</div>
         <div class="text-pink">${date}</div>
       </div>` +
-
       '';
 
     tooltip.showTooltip(content, d3.event);
@@ -364,12 +349,10 @@ function bubbleChart() {
   return chart;
 }
 
-
 /**
  * _bubbleChart Init main constant
  * */
 const _bubbleChart = bubbleChart();
-
 
 /**
  * display - render bubble chart
@@ -388,7 +371,6 @@ function setupButtons() {
   d3.select('#toolbar')
     .selectAll('.button')
     .on('click', function () {
-
       // Remove active class from all buttons
       d3.selectAll('.button').classed('active', false);
 
@@ -404,27 +386,15 @@ function setupButtons() {
       // Toggle the bubble chart based on
       // the currently clicked button.
       _bubbleChart.toggleDisplay(buttonId);
-
     });
 }
 
-async function getData() {
-  const url = 'https://api.covidtracking.com/v2/states.json'
-  try {
-    return await axios.get(url)
-  } catch (err) {
-    console.error('ERROR: ', err)
-    console.log(err)
-    alert(err + ' -> async function getData() -> url: ' + url)
-  }
-}
-
-const init = new Promise(async function (resolve) {
-  let res = await getData()
-  resolve(res.data)
-})
+const init = new Promise((resolve) => {
+  const _data = getData();
+  resolve(_data);
+});
 
 init.then(function (res) {
-  display(res)
+  display(res);
   setupButtons();
-})
+});
